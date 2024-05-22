@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      validator: [
+      validater: [
         validator.isEmail,
         "Lütfen geçerli bir email adresi giriniz.",
       ],
@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 8,
       select: false,
-      validator: {
+      validater: {
         validator: function (el) {
           return el === this.password;
         },
@@ -44,9 +44,9 @@ const UserSchema = new mongoose.Schema(
     birthDate: {
       type: Date,
       required: true,
-      validator: {
+      validater: {
         validator: function (el) {
-          return el >= Date.now() && el === null;
+          return el < Date.now() && el === null;
         },
         message: "Lütfen geçerli bir tarih giriniz.",
       },
@@ -54,7 +54,7 @@ const UserSchema = new mongoose.Schema(
     gender: {
       type: String,
       required: true,
-      validator: {
+      validater: {
         validator: function (el) {
           return ["Erkek", "Kadın", "Belirtmek istemiyorum"].includes(el);
         },
@@ -64,7 +64,7 @@ const UserSchema = new mongoose.Schema(
     phoneNumber: {
       type: String,
       required: true,
-      validator: {
+      validater: {
         validator: function (el) {
           return validator.isMobilePhone(el, "tr-TR");
         },

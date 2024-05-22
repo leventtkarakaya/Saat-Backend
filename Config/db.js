@@ -9,8 +9,6 @@ const DataBase = () => {
   mongoose
     .connect(mongoURI, {
       dbName: "Saat",
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
     })
     .then(() => {
       console.log("MongoDB connected");
