@@ -132,12 +132,12 @@ const login = async (req, res) => {
     // ? User email and password verification
     const user = await User.findOne({ email }).select("+password");
     if (!user) {
-      return res.status(400).json({ message: "Kullanıcı e-mail bulunamadı." });
+      return res.status(400).json({ message: "Kullanıcı bulunamadı." });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Şifre hatalı." });
+      return res.status(400).json({ message: "Hatalı giriş yaptınız" });
     }
 
     // ? Token creation

@@ -24,10 +24,13 @@ app.use(express.static(`${__dirname}/public`));
 app.get("/", function (req, res) {
   res.render("index");
 });
+
 // ? Routers
 const AuthRouter = require("./Router/Auth");
+const ImageRouter = require("./Router/UserImage");
 
-app.use("/api/auth/", AuthRouter);
+app.use("/api/auth", AuthRouter);
+app.use("/api/image", ImageRouter);
 
 // ? database
 DataBase();

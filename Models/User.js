@@ -51,6 +51,14 @@ const UserSchema = new mongoose.Schema(
         message: "Lütfen geçerli bir tarih giriniz.",
       },
     },
+    otp: {
+      type: Number,
+    },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
     gender: {
       type: String,
       required: true,
@@ -73,6 +81,7 @@ const UserSchema = new mongoose.Schema(
     },
     profilePicture: {
       type: String,
+      required: false,
       default:
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
     },
