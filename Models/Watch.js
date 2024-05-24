@@ -12,60 +12,178 @@ const bodyStructure = new mongoose.Schema({
   },
   vaultStone: {
     type: String,
-    required: true,
   },
   caseDiameter: {
     type: Number,
-    required: true,
   },
   caseThickness: {
     type: Number,
+  },
+  caseMaterial: {
+    type: String,
+  },
+  caseColar: {
+    type: String,
+  },
+  caseShape: {
+    type: String,
+  },
+  style: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const jewelryFeature = new mongoose.Schema({
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
     required: true,
   },
   caseMaterial: {
     type: String,
-    required: true,
   },
   caseColar: {
     type: String,
-    required: true,
   },
   caseShape: {
     type: String,
-    required: true,
   },
-  style: {
+  jewelryStone: {
     type: String,
-    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 
-const jewelryFeature = new mongoose.Schema({});
-
-const watchSchema = new mongoose.Schema({
-  name: {
-    type: String,
+const dialStructure = new mongoose.Schema({
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
     required: true,
   },
-  model: {
-    type: String,
-    required: true,
-  },
-  technology: {
+  dialStone: {
     type: String,
   },
-  gender: {
+  dialColar: {
     type: String,
-    required: true,
   },
-  guarantee: {
+  dialType: {
     type: String,
-    required: true,
   },
-  description: {
-    type: String,
-    required: true,
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
-  bodyStructure: [bodyStructure],
-  jewelry: [jewelryFeature],
 });
+
+const beltStructure = new mongoose.Schema({
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  beltColar: {
+    type: String,
+  },
+  beltType: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const watchFeatures = new mongoose.Schema({
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  Alarm: {
+    type: String,
+  },
+  Stopwatch: {
+    type: String,
+  },
+  Waterproof: {
+    type: String,
+  },
+  calendar: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const AutoID = mongoose.Types.ObjectId;
+
+const watchSchema = new mongoose.Schema(
+  {
+    id: AutoID,
+    brand: {
+      type: String,
+      required: true,
+    },
+    model: {
+      type: String,
+      required: true,
+    },
+    technology: {
+      type: String,
+    },
+    gender: {
+      type: String,
+      required: true,
+    },
+    guarantee: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    watchImage: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    discount: {
+      type: Number,
+    },
+    favorite: {
+      type: Boolean,
+      default: false,
+      select: false,
+    },
+    watchFeatures: [watchFeatures],
+    beltStructure: [beltStructure],
+    bodyStructure: [bodyStructure],
+    dialStructure: [dialStructure],
+    jewelry: [jewelryFeature],
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
+
+module.exports = mongoose.model("Watch", watchSchema);
